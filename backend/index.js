@@ -6,6 +6,8 @@ const userRouter = require('./router/userRouter')
 const expenseRouter = require('./router/expenseRouter')
 const app = express();
 
+dotenv.config();
+
 app.use(cors());
 app.use(express.json());
 app.use('/auth',userRouter)
