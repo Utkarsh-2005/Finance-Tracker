@@ -62,6 +62,6 @@ const data = {
 ;
 
   //////////////////////////////////////////////////////////////////
-  return <Doughnut className='w-full h-full' data={data} />;
+  return <Doughnut className='w-[80%] h-[80%]' data={data} />;
 }
 

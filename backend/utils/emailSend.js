@@ -1,6 +1,7 @@
 const { jsPDF }= require('jspdf');
 const nodemailer = require('nodemailer');
 const dataParserForItems = require('./dataParser');
+const { default: fromUnixTime } = require('date-fns/fromUnixTime');
 require('jspdf-autotable');
 
 
@@ -41,15 +42,23 @@ async function sendEmailWithAttachment( recipient,items) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'ldead4524@gmail.com',
-            pass: 'cppqyjfnxyhrxkzq'
+            user: process.env.EMAIL,
+            pass: process.env.PASS
         }
     });
-    let body = dataParserForItems(items)
+    const sortedExpenses = items.sort((a, b) => new Date(a.date) - new Date(b.date));
+    const formattedExpenses = sortedExpenses.map((expense, index) => ({
+      id: index + 1,
+      date: expense.date,
+      amount: expense.amount,
+      category: expense.category,
+  }));
+    // console.log(formattedExpenses)
+    let body = dataParserForItems(formattedExpenses);
       const pdfContent = generatePDF(body)
 
       const mailOptions = {
-        from:'ldead4524@gmail.com' , 
+        from:process.env.EMAIL , 
         to: recipient,
         subject: 'Expense Report for This Month',
         text: 'Please find your expense report attached.',

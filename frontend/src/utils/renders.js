@@ -66,6 +66,7 @@ export const deleteExpense = async (data)=>{
 
 export const sendEmail = async (sender , data)=>{
         try {
+            console.log(data)
             const response = await axiosClient.post('/expenses/sendEmail',{
                 recipient : sender , 
                 body : data
