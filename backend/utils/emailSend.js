@@ -30,6 +30,16 @@ function generatePDF(data) {
           textColor : [0,0,0],
           fontSize : 14
       },
+      headStyles: {
+        fillColor: [0, 176, 80],  
+        textColor: [255, 255, 255],
+        fontSize: 14
+    },
+    footStyles: {
+        fillColor: [0, 176, 80], 
+        textColor: [255, 255, 255], 
+        fontStyle: 'bold'
+    }
     })
 
 
